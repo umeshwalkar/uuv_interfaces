@@ -1,0 +1,46 @@
+// SYNCED COPY -- sourced from xl300-dds-v2/idl/sensors/ctd.idl. Do NOT edit
+// directly: fix in xl300-dds-v2, then re-sync (see ../README.md). Include path
+// below changed from "../common.idl" to "common.idl" -- this repo keeps every IDL
+// flat in idl/, unlike xl300-dds-v2's idl/sensors/ subdirectory.
+//
+// NOTE on unit comments below (flagged, not silently fixed): the real VALEPORT
+// Bathy2 wire frame reports `pressure`/`pressure_aux` in dbar, not bar (see
+// workspace-mqtt/xl300-ctd-manager/docs/payloads.md) -- xl300-dds-v2's IDL comment
+// looks like a copy/paste unit slip. Values are written through unconverted
+// either way, so this doesn't affect wire correctness. Raise with xl300-dds-v2
+// maintainers, don't fix the comment here.
+#include "common.idl"
+
+// sensors/ctd -- Conductivity/Temperature/Depth, single unit. Fields verbatim from
+// the real ctd_manager payload (uuv/ctd/data -> devices[0].measurement). Per
+// promp-1.md, CTD is primarily a mission payload sensor (-> mission/ctd) but its
+// depth/sound-velocity/water-temp readings are also consumed by NSS as an optional
+// aiding vote (see nav/nss.idl NavDiagnostic.voting contributions tagged "ctd") --
+// same CtdSample type published once on sensors/ctd, read by both consumers.
+module xl300
+{
+    @extensibility(APPENDABLE)
+    struct CtdSample
+    {
+        CommonHeader   header;
+        unsigned short device_id;
+        string<32>     device_name;
+        boolean        valid;
+
+        string<16> date;              // "YYYY-MM-DD", as reported by the instrument
+        string<16> time;              // "HH:MM:SS.mmm"
+
+        double conductivity;          // mS/cm
+        double pressure;              // bar
+        double water_temp;            // degC
+        double altimeter_height;      // m
+        double sound_vel;             // m/s
+        double pressure_aux;          // bar
+        double depth;                 // m
+        double total_depth;           // m
+        double point_density;         // kg/m3
+        double profile_density;       // kg/m3
+        double salinity;              // PSU
+        double pressure_baro;         // bar
+    };
+};

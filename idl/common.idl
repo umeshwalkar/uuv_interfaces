@@ -1,0 +1,37 @@
+// SYNCED COPY -- sourced from xl300-dds-v2/idl/common.idl (the normative XL300 DDS
+// contract). Do NOT edit this copy directly: fix it in xl300-dds-v2, then re-sync
+// (see ../README.md's "Resyncing from xl300-dds-v2" section).
+//
+// XL300 DDS -- shared types every other .idl file depends on.
+//
+// NOT "Header": eProsima's fastddsgen is case-insensitive on identifier collisions
+// (upstream bug: eProsima/IDL-Parser#38) -- a type literally named `Header` collides
+// with any field named `header` even though the two live in different scopes per the
+// OMG IDL spec. Keep this name `CommonHeader`; do not rename it back to `Header`.
+module xl300
+{
+    // Epoch milliseconds -- matches every existing MQTT payload's `ts`/`data_ts`
+    // convention (xl300-messaging SCHEMA.md golden rule #1/#3: integer ms, never
+    // seconds, never float).
+    typedef unsigned long long Timestamp;
+
+    @extensibility(APPENDABLE)
+    struct CommonHeader
+    {
+        Timestamp      ts;               // envelope send time (matches MQTT `ts`)
+        Timestamp      data_ts;          // underlying reading/fusion time (matches MQTT `data_ts`); 0 if not applicable
+        string<64>     sender;           // publishing module, e.g. "ins_manager", "nss" (matches MQTT `sender`)
+        unsigned short schema_version;   // bump on breaking change; types below are APPENDABLE so old readers survive additive changes without a bump
+    };
+
+    // Aggregate 3-state navigation banding. Real wire values (nss `navcore`/`status`
+    // JSON) are the strings "Normal"/"Degraded"/"Invalid" -- NAV_ prefix avoids
+    // fastddsgen emitting unscoped C++ enums that would collide with HealthState's
+    // HEALTH_* values (health.idl) in the shared xl300 namespace.
+    enum NavIntegrity
+    {
+        NAV_NORMAL,
+        NAV_DEGRADED,
+        NAV_INVALID
+    };
+};
