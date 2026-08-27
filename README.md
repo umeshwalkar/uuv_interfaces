@@ -35,6 +35,17 @@ with a standard include guard (2026-08-27) — this repo's submodule pointer
 should stay at or after that fix.
 
 ## Updating the submodule
+
+**Automatically (2026-08-27):** `.github/workflows/sync-contract.yml` polls
+`xl300-dds-v2` every 6 hours (+ a manual "Run workflow" button). When it finds
+a newer tag than the one currently pinned, it bumps the submodule, regenerates
+via the real `fastddsgen` inside `ghcr.io/umeshwalkar/xl300-dev-base:0.1.0`
+(built by that repo's own CI), **build-verifies the result actually compiles**,
+and only then opens a PR with the bump + regenerated code together — nothing
+lands if the build fails. Requires the one-time repo setting noted in
+`xl300-dev-base/README.md` (Actions write permissions for `GITHUB_TOKEN`).
+
+**Manually**, if you need it sooner or the workflow isn't set up yet:
 ```bash
 cd xl300-dds-v2
 git fetch --tags
@@ -46,7 +57,13 @@ git add generated
 git commit -m "Bump xl300-dds-v2 to v0.1.1, regenerate"
 ```
 Always bump the submodule to a **tag**, not a floating branch — see
-`xl300-dds-v2`'s own versioning discipline once it has more than one tag.
+`xl300-dds-v2`'s own versioning discipline.
+
+**Note the automated PR does NOT bump consuming apps.** After merging it, still
+manually bump `uuv_interfaces`' pinned commit in every consumer
+(`xl300-ctd-manager` today) the same deliberate way — a contract bump reaching
+`uuv_interfaces` isn't the same event as it reaching an app that ships on the
+vehicle; that step stays a human decision.
 
 ## Generate (only needed after a submodule bump)
 ```bash
