@@ -4,6 +4,17 @@ project(uuv_interfaces CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# ccache -- optional, no-op if not installed. Only sets it if a top-level
+# add_subdirectory() consumer hasn't already (this repo is also buildable
+# standalone, e.g. for its own verification builds).
+if(NOT DEFINED CMAKE_CXX_COMPILER_LAUNCHER)
+  find_program(CCACHE_PROGRAM ccache)
+  if(CCACHE_PROGRAM)
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+    set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+  endif()
+endif()
+
 # Fast DDS package name differs by version line: the ENTIRE 2.x line's CMake
 # project is literally named 'fastrtps' (umeshwalkar/xl300-dev-base:0.1.0 pins
 # Fast-DDS 2.14.x LTS). Only resolve it here if a consumer hasn't already --
