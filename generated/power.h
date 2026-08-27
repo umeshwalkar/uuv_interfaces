@@ -33,8 +33,8 @@
 #include <fastcdr/xcdr/external.hpp>
 #include <fastcdr/xcdr/optional.hpp>
 
-#include "../health.h"
-#include "../common.h"
+#include "common.h"
+#include "health.h"
 
 
 #if defined(_WIN32)

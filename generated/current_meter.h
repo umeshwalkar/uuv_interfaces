@@ -33,7 +33,7 @@
 #include <fastcdr/xcdr/external.hpp>
 #include <fastcdr/xcdr/optional.hpp>
 
-#include "../common.h"
+#include "common.h"
 
 
 #if defined(_WIN32)

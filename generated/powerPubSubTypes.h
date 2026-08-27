@@ -33,8 +33,8 @@
 
 #include "power.h"
 
-#include "../healthPubSubTypes.h"
-#include "../commonPubSubTypes.h"
+#include "commonPubSubTypes.h"
+#include "healthPubSubTypes.h"
 
 #if !defined(GEN_API_VER) || (GEN_API_VER != 2)
 #error \

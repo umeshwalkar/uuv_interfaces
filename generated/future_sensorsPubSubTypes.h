@@ -33,7 +33,7 @@
 
 #include "future_sensors.h"
 
-#include "../commonPubSubTypes.h"
+#include "commonPubSubTypes.h"
 
 #if !defined(GEN_API_VER) || (GEN_API_VER != 2)
 #error \
