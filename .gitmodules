@@ -1,3 +1,3 @@
 [submodule "xl300-dds-v2"]
 	path = xl300-dds-v2
-	url = /workspace-dds/xl300-dds-v2
+	url = https://github.com/umeshwalkar/xl300-dds-v2.git
