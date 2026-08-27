@@ -32,4 +32,14 @@ while IFS= read -r -d '' idl; do
   ( cd "${dir}" && fastddsgen -replace -d "${OUT}" -I "${IDL_DIR}" "${file}" )
 done < <(find "${IDL_DIR}" -name '*.idl' -print0 | sort -z)
 
+# contract_constants.hpp: domain id, topic name strings, QoS profile names,
+# partition names -- generated from xl300-dds-v2's config/*.yaml, same
+# single-source-of-truth treatment as the IDL types above. See
+# gen_contract_constants.py's own docstring for why this parses the two YAML
+# files by hand instead of depending on PyYAML.
+python3 "${HERE}/gen_contract_constants.py" \
+  "${HERE}/xl300-dds-v2/config/dds_domain.yaml" \
+  "${HERE}/xl300-dds-v2/config/topic_registry.yaml" \
+  "${OUT}/contract_constants.hpp"
+
 echo "[OK] Generated into ${OUT}"
