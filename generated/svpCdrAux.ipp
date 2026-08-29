@@ -75,6 +75,24 @@ eProsima_user_DllExport size_t calculate_serialized_size(
         calculated_size += calculator.calculate_member_serialized_size(eprosima::fastcdr::MemberId(6),
                 data.water_temp(), current_alignment);
 
+        calculated_size += calculator.calculate_member_serialized_size(eprosima::fastcdr::MemberId(7),
+                data.salinity(), current_alignment);
+
+        calculated_size += calculator.calculate_member_serialized_size(eprosima::fastcdr::MemberId(8),
+                data.salinity_valid(), current_alignment);
+
+        calculated_size += calculator.calculate_member_serialized_size(eprosima::fastcdr::MemberId(9),
+                data.density(), current_alignment);
+
+        calculated_size += calculator.calculate_member_serialized_size(eprosima::fastcdr::MemberId(10),
+                data.density_valid(), current_alignment);
+
+        calculated_size += calculator.calculate_member_serialized_size(eprosima::fastcdr::MemberId(11),
+                data.depth(), current_alignment);
+
+        calculated_size += calculator.calculate_member_serialized_size(eprosima::fastcdr::MemberId(12),
+                data.depth_valid(), current_alignment);
+
 
     calculated_size += calculator.end_calculate_type_serialized_size(previous_encoding, current_alignment);
 
@@ -102,6 +120,12 @@ eProsima_user_DllExport void serialize(
         << eprosima::fastcdr::MemberId(4) << data.pressure()
         << eprosima::fastcdr::MemberId(5) << data.sound_vel()
         << eprosima::fastcdr::MemberId(6) << data.water_temp()
+        << eprosima::fastcdr::MemberId(7) << data.salinity()
+        << eprosima::fastcdr::MemberId(8) << data.salinity_valid()
+        << eprosima::fastcdr::MemberId(9) << data.density()
+        << eprosima::fastcdr::MemberId(10) << data.density_valid()
+        << eprosima::fastcdr::MemberId(11) << data.depth()
+        << eprosima::fastcdr::MemberId(12) << data.depth_valid()
 ;
     scdr.end_serialize_type(current_state);
 }
@@ -147,6 +171,30 @@ eProsima_user_DllExport void deserialize(
 
                                         case 6:
                                                 dcdr >> data.water_temp();
+                                            break;
+
+                                        case 7:
+                                                dcdr >> data.salinity();
+                                            break;
+
+                                        case 8:
+                                                dcdr >> data.salinity_valid();
+                                            break;
+
+                                        case 9:
+                                                dcdr >> data.density();
+                                            break;
+
+                                        case 10:
+                                                dcdr >> data.density_valid();
+                                            break;
+
+                                        case 11:
+                                                dcdr >> data.depth();
+                                            break;
+
+                                        case 12:
+                                                dcdr >> data.depth_valid();
                                             break;
 
                     default:

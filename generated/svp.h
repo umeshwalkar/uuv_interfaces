@@ -286,6 +286,126 @@ public:
      */
     eProsima_user_DllExport double& water_temp();
 
+
+    /*!
+     * @brief This function sets a value in member salinity
+     * @param _salinity New value for member salinity
+     */
+    eProsima_user_DllExport void salinity(
+            double _salinity);
+
+    /*!
+     * @brief This function returns the value of member salinity
+     * @return Value of member salinity
+     */
+    eProsima_user_DllExport double salinity() const;
+
+    /*!
+     * @brief This function returns a reference to member salinity
+     * @return Reference to member salinity
+     */
+    eProsima_user_DllExport double& salinity();
+
+
+    /*!
+     * @brief This function sets a value in member salinity_valid
+     * @param _salinity_valid New value for member salinity_valid
+     */
+    eProsima_user_DllExport void salinity_valid(
+            bool _salinity_valid);
+
+    /*!
+     * @brief This function returns the value of member salinity_valid
+     * @return Value of member salinity_valid
+     */
+    eProsima_user_DllExport bool salinity_valid() const;
+
+    /*!
+     * @brief This function returns a reference to member salinity_valid
+     * @return Reference to member salinity_valid
+     */
+    eProsima_user_DllExport bool& salinity_valid();
+
+
+    /*!
+     * @brief This function sets a value in member density
+     * @param _density New value for member density
+     */
+    eProsima_user_DllExport void density(
+            double _density);
+
+    /*!
+     * @brief This function returns the value of member density
+     * @return Value of member density
+     */
+    eProsima_user_DllExport double density() const;
+
+    /*!
+     * @brief This function returns a reference to member density
+     * @return Reference to member density
+     */
+    eProsima_user_DllExport double& density();
+
+
+    /*!
+     * @brief This function sets a value in member density_valid
+     * @param _density_valid New value for member density_valid
+     */
+    eProsima_user_DllExport void density_valid(
+            bool _density_valid);
+
+    /*!
+     * @brief This function returns the value of member density_valid
+     * @return Value of member density_valid
+     */
+    eProsima_user_DllExport bool density_valid() const;
+
+    /*!
+     * @brief This function returns a reference to member density_valid
+     * @return Reference to member density_valid
+     */
+    eProsima_user_DllExport bool& density_valid();
+
+
+    /*!
+     * @brief This function sets a value in member depth
+     * @param _depth New value for member depth
+     */
+    eProsima_user_DllExport void depth(
+            double _depth);
+
+    /*!
+     * @brief This function returns the value of member depth
+     * @return Value of member depth
+     */
+    eProsima_user_DllExport double depth() const;
+
+    /*!
+     * @brief This function returns a reference to member depth
+     * @return Reference to member depth
+     */
+    eProsima_user_DllExport double& depth();
+
+
+    /*!
+     * @brief This function sets a value in member depth_valid
+     * @param _depth_valid New value for member depth_valid
+     */
+    eProsima_user_DllExport void depth_valid(
+            bool _depth_valid);
+
+    /*!
+     * @brief This function returns the value of member depth_valid
+     * @return Value of member depth_valid
+     */
+    eProsima_user_DllExport bool depth_valid() const;
+
+    /*!
+     * @brief This function returns a reference to member depth_valid
+     * @return Reference to member depth_valid
+     */
+    eProsima_user_DllExport bool& depth_valid();
+
 private:
 
     xl300::CommonHeader m_header;
@@ -295,6 +415,12 @@ private:
     double m_pressure{0.0};
     double m_sound_vel{0.0};
     double m_water_temp{0.0};
+    double m_salinity{0.0};
+    bool m_salinity_valid{false};
+    double m_density{0.0};
+    bool m_density_valid{false};
+    double m_depth{0.0};
+    bool m_depth_valid{false};
 
 };
 

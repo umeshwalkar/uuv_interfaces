@@ -59,6 +59,12 @@ SvpSample::SvpSample(
     m_pressure = x.m_pressure;
     m_sound_vel = x.m_sound_vel;
     m_water_temp = x.m_water_temp;
+    m_salinity = x.m_salinity;
+    m_salinity_valid = x.m_salinity_valid;
+    m_density = x.m_density;
+    m_density_valid = x.m_density_valid;
+    m_depth = x.m_depth;
+    m_depth_valid = x.m_depth_valid;
 }
 
 SvpSample::SvpSample(
@@ -71,6 +77,12 @@ SvpSample::SvpSample(
     m_pressure = x.m_pressure;
     m_sound_vel = x.m_sound_vel;
     m_water_temp = x.m_water_temp;
+    m_salinity = x.m_salinity;
+    m_salinity_valid = x.m_salinity_valid;
+    m_density = x.m_density;
+    m_density_valid = x.m_density_valid;
+    m_depth = x.m_depth;
+    m_depth_valid = x.m_depth_valid;
 }
 
 SvpSample& SvpSample::operator =(
@@ -84,6 +96,12 @@ SvpSample& SvpSample::operator =(
     m_pressure = x.m_pressure;
     m_sound_vel = x.m_sound_vel;
     m_water_temp = x.m_water_temp;
+    m_salinity = x.m_salinity;
+    m_salinity_valid = x.m_salinity_valid;
+    m_density = x.m_density;
+    m_density_valid = x.m_density_valid;
+    m_depth = x.m_depth;
+    m_depth_valid = x.m_depth_valid;
     return *this;
 }
 
@@ -98,6 +116,12 @@ SvpSample& SvpSample::operator =(
     m_pressure = x.m_pressure;
     m_sound_vel = x.m_sound_vel;
     m_water_temp = x.m_water_temp;
+    m_salinity = x.m_salinity;
+    m_salinity_valid = x.m_salinity_valid;
+    m_density = x.m_density;
+    m_density_valid = x.m_density_valid;
+    m_depth = x.m_depth;
+    m_depth_valid = x.m_depth_valid;
     return *this;
 }
 
@@ -110,7 +134,13 @@ bool SvpSample::operator ==(
            m_valid == x.m_valid &&
            m_pressure == x.m_pressure &&
            m_sound_vel == x.m_sound_vel &&
-           m_water_temp == x.m_water_temp);
+           m_water_temp == x.m_water_temp &&
+           m_salinity == x.m_salinity &&
+           m_salinity_valid == x.m_salinity_valid &&
+           m_density == x.m_density &&
+           m_density_valid == x.m_density_valid &&
+           m_depth == x.m_depth &&
+           m_depth_valid == x.m_depth_valid);
 }
 
 bool SvpSample::operator !=(
@@ -339,6 +369,180 @@ double SvpSample::water_temp() const
 double& SvpSample::water_temp()
 {
     return m_water_temp;
+}
+
+
+/*!
+ * @brief This function sets a value in member salinity
+ * @param _salinity New value for member salinity
+ */
+void SvpSample::salinity(
+        double _salinity)
+{
+    m_salinity = _salinity;
+}
+
+/*!
+ * @brief This function returns the value of member salinity
+ * @return Value of member salinity
+ */
+double SvpSample::salinity() const
+{
+    return m_salinity;
+}
+
+/*!
+ * @brief This function returns a reference to member salinity
+ * @return Reference to member salinity
+ */
+double& SvpSample::salinity()
+{
+    return m_salinity;
+}
+
+
+/*!
+ * @brief This function sets a value in member salinity_valid
+ * @param _salinity_valid New value for member salinity_valid
+ */
+void SvpSample::salinity_valid(
+        bool _salinity_valid)
+{
+    m_salinity_valid = _salinity_valid;
+}
+
+/*!
+ * @brief This function returns the value of member salinity_valid
+ * @return Value of member salinity_valid
+ */
+bool SvpSample::salinity_valid() const
+{
+    return m_salinity_valid;
+}
+
+/*!
+ * @brief This function returns a reference to member salinity_valid
+ * @return Reference to member salinity_valid
+ */
+bool& SvpSample::salinity_valid()
+{
+    return m_salinity_valid;
+}
+
+
+/*!
+ * @brief This function sets a value in member density
+ * @param _density New value for member density
+ */
+void SvpSample::density(
+        double _density)
+{
+    m_density = _density;
+}
+
+/*!
+ * @brief This function returns the value of member density
+ * @return Value of member density
+ */
+double SvpSample::density() const
+{
+    return m_density;
+}
+
+/*!
+ * @brief This function returns a reference to member density
+ * @return Reference to member density
+ */
+double& SvpSample::density()
+{
+    return m_density;
+}
+
+
+/*!
+ * @brief This function sets a value in member density_valid
+ * @param _density_valid New value for member density_valid
+ */
+void SvpSample::density_valid(
+        bool _density_valid)
+{
+    m_density_valid = _density_valid;
+}
+
+/*!
+ * @brief This function returns the value of member density_valid
+ * @return Value of member density_valid
+ */
+bool SvpSample::density_valid() const
+{
+    return m_density_valid;
+}
+
+/*!
+ * @brief This function returns a reference to member density_valid
+ * @return Reference to member density_valid
+ */
+bool& SvpSample::density_valid()
+{
+    return m_density_valid;
+}
+
+
+/*!
+ * @brief This function sets a value in member depth
+ * @param _depth New value for member depth
+ */
+void SvpSample::depth(
+        double _depth)
+{
+    m_depth = _depth;
+}
+
+/*!
+ * @brief This function returns the value of member depth
+ * @return Value of member depth
+ */
+double SvpSample::depth() const
+{
+    return m_depth;
+}
+
+/*!
+ * @brief This function returns a reference to member depth
+ * @return Reference to member depth
+ */
+double& SvpSample::depth()
+{
+    return m_depth;
+}
+
+
+/*!
+ * @brief This function sets a value in member depth_valid
+ * @param _depth_valid New value for member depth_valid
+ */
+void SvpSample::depth_valid(
+        bool _depth_valid)
+{
+    m_depth_valid = _depth_valid;
+}
+
+/*!
+ * @brief This function returns the value of member depth_valid
+ * @return Value of member depth_valid
+ */
+bool SvpSample::depth_valid() const
+{
+    return m_depth_valid;
+}
+
+/*!
+ * @brief This function returns a reference to member depth_valid
+ * @return Reference to member depth_valid
+ */
+bool& SvpSample::depth_valid()
+{
+    return m_depth_valid;
 }
 
 
