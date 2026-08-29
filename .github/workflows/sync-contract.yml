@@ -8,14 +8,18 @@ name: Sync from xl300-dds-v2
 # anything that failed to build -- same discipline this repo's history was
 # built on by hand (see README.md's "Real bug this design already caught").
 #
-# Poll, not an instant push-based trigger: avoids needing a cross-repo PAT
-# secret in xl300-dds-v2 just to fire a repository_dispatch here. A few hours'
-# lag is fine for a contract that's tagged occasionally, not continuously --
-# revisit only if that stops being true.
+# Push-triggered via repository_dispatch: xl300-dds-v2's own
+# notify-uuv-interfaces.yml fires an "xl300-dds-v2-tagged" event here the
+# moment it tags, using a fine-grained PAT scoped only to this repo. The
+# schedule below stays as a fallback net in case that dispatch call ever fails
+# silently (token expiry, API hiccup, etc) -- without it, a dropped dispatch
+# would mean this repo silently drifts from the contract until someone notices.
 
 on:
   schedule:
-    - cron: "0 */6 * * *"   # every 6 hours
+    - cron: "0 */6 * * *"   # fallback net, not the primary trigger
+  repository_dispatch:
+    types: [xl300-dds-v2-tagged]
   workflow_dispatch: {}
 
 permissions:
