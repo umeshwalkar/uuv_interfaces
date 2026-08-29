@@ -39,7 +39,7 @@ should stay at or after that fix.
 **Automatically (2026-08-27):** `.github/workflows/sync-contract.yml` polls
 `xl300-dds-v2` every 6 hours (+ a manual "Run workflow" button). When it finds
 a newer tag than the one currently pinned, it bumps the submodule, regenerates
-via the real `fastddsgen` inside `ghcr.io/umeshwalkar/xl300-dev-base:0.1.0`
+via the real `fastddsgen` inside `docker.io/umeshwalkar/xl300-dev-base:0.1.0`
 (built by that repo's own CI), **build-verifies the result actually compiles**,
 and only then opens a PR with the bump + regenerated code together — nothing
 lands if the build fails. Requires the one-time repo setting noted in

@@ -2,7 +2,7 @@ name: Sync from xl300-dds-v2
 
 # Polls xl300-dds-v2 for a newer tag than the one currently pinned. If found:
 # bump the submodule -> regenerate via the real fastddsgen (inside
-# ghcr.io/umeshwalkar/xl300-dev-base:0.1.0, built by that repo's own CI) ->
+# docker.io/umeshwalkar/xl300-dev-base:0.1.0, built by that repo's own CI) ->
 # build-verify the result actually compiles -> open a PR with the bump +
 # regenerated code together, for a human glance before it lands. Never commits
 # anything that failed to build -- same discipline this repo's history was
@@ -65,7 +65,7 @@ jobs:
         if: steps.check.outputs.up_to_date == 'false'
         run: |
           docker run --rm -v "${{ github.workspace }}:/work" -w /work \
-            ghcr.io/umeshwalkar/xl300-dev-base:0.1.0 \
+            docker.io/umeshwalkar/xl300-dev-base:0.1.0 \
             bash -c "set -euo pipefail; chmod +x ./gen.sh && ./gen.sh && \
                      cmake -B build -DCMAKE_BUILD_TYPE=Release && \
                      cmake --build build -j\$(nproc)"
@@ -85,7 +85,7 @@ jobs:
 
             The submodule was bumped to that tag and `generated/` was
             regenerated + build-verified (`cmake --build`) inside
-            `ghcr.io/umeshwalkar/xl300-dev-base:0.1.0` before this PR was opened
+            `docker.io/umeshwalkar/xl300-dev-base:0.1.0` before this PR was opened
             -- this only reaches you because the build actually succeeded.
 
             Check the linked contract diff before merging, then bump every
