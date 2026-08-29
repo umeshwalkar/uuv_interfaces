@@ -24,7 +24,7 @@
 
 #include "svp.h"
 
-constexpr uint32_t xl300_SvpSample_max_cdr_typesize {168UL};
+constexpr uint32_t xl300_SvpSample_max_cdr_typesize {209UL};
 constexpr uint32_t xl300_SvpSample_max_key_cdr_typesize {0UL};
 
 
