@@ -58,6 +58,10 @@ namespace topics {
     constexpr TopicInfo kSafetyState = { "safety/state", "xl300::SafetyState", "SAFETY", "safety" };
     constexpr TopicInfo kSafetyAlert = { "safety/alert", "xl300::SafetyAlert", "SAFETY", "safety" };
     constexpr TopicInfo kSafetyAbort = { "safety/abort", "xl300::EmergencyAbort", "SAFETY", "safety" };
+    constexpr TopicInfo kIoDi = { "io/di", "xl300::DigitalInputStatus", "SENSOR", "io" };
+    constexpr TopicInfo kIoAi = { "io/ai", "xl300::AnalogInputStatus", "SENSOR", "io" };
+    constexpr TopicInfo kIoDoCmd = { "io/do/cmd", "xl300::DigitalOutputCommand", "CONTROL", "io" };
+    constexpr TopicInfo kIoDoStatus = { "io/do/status", "xl300::DigitalOutputStatus", "STATE", "io" };
     constexpr TopicInfo kHealth = { "health/<node>", "xl300::Heartbeat", "HEALTH", "diagnostics" };
 } // namespace topics
 
