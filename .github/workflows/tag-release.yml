@@ -1,0 +1,54 @@
+name: Tag matching xl300-dds-v2 release
+
+# sync-contract.yml opens a "bump-xl300-dds-v2-vX.Y.Z" PR the moment
+# xl300-dds-v2 tags -- before any human has reviewed the regenerated code.
+# This workflow is deliberately separate and fires only once a human actually
+# merges that PR, so the matching tag here always points at reviewed content,
+# never at an unmerged bump. Replaces the manual `git tag -a` + push done by
+# hand for v0.1.1/v0.1.2/v0.1.3 before this existed.
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    if: >
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'bump-xl300-dds-v2-')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout merged base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+
+      - name: Extract version from the bump branch name
+        id: version
+        run: |
+          set -euo pipefail
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+          VERSION="${BRANCH#bump-xl300-dds-v2-}"
+          if [[ ! "${VERSION}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "FATAL: could not parse a vX.Y.Z version from branch '${BRANCH}'" >&2
+            exit 1
+          fi
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Create and push the matching tag (idempotent)
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          if git ls-remote --tags origin "refs/tags/${VERSION}" | grep -q .; then
+            echo "Tag ${VERSION} already exists on origin -- nothing to do"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "${VERSION}" -m "Matches xl300-dds-v2 ${VERSION}. generated/ built from that tag (merged via PR #${PR_NUMBER})."
+          git push origin "${VERSION}"
