@@ -1,0 +1,3 @@
+- [DDS pipeline architecture](dds_pipeline_architecture.md) — why 3 layers, tag-pairing convention between xl300-dds-v2 and uuv_interfaces
+- [DDS pipeline gotchas](dds_pipeline_gotchas.md) — CI/Docker bugs already hit and fixed (GHCR, broken 0.1.0 tag, root-owned files, PR permission)
+- [workspace-dds repo map](workspace_dds_repo_map.md) — which repo is which, GitHub/Docker Hub locations
