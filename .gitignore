@@ -2,3 +2,6 @@ build/
 out/
 *.o
 *.a
+
+# Raw Claude Code session transcripts (mirrored locally, not committed)
+.claude/sessions/
