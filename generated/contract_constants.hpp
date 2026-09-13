@@ -31,6 +31,7 @@ namespace topics {
     constexpr TopicInfo kSensorsAis = { "sensors/ais", "xl300::AisVessel", "SENSOR", "mission" };
     constexpr TopicInfo kSensorsCurrent = { "sensors/current", "xl300::CurrentSample", "SENSOR", "mission" };
     constexpr TopicInfo kSensorsMagnetic = { "sensors/magnetic", "xl300::MagneticField", "SENSOR", "mission" };
+    constexpr TopicInfo kSensorsDissub = { "sensors/dissub", "xl300::DissubMeasurement", "SENSOR", "mission" };
     constexpr TopicInfo kSensorsUsbl = { "sensors/usbl", "xl300::UsblFix", "SENSOR", "comms" };
     constexpr TopicInfo kSensorsRadar = { "sensors/radar", "xl300::RadarTrack", "SENSOR", "mission" };
     constexpr TopicInfo kPayloadEoir = { "payload/eoir", "xl300::ImageFrameInfo", "PAYLOAD", "mission" };
